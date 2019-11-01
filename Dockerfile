@@ -1,12 +1,13 @@
 FROM openjdk:11-jre
 
-MAINTAINER Alex Hokori <13hokori@gmail.com>
 
-ENV BLYNK_SERVER_VERSION curl --silent "https://api.github.com/repos/blynkkk/blynk-server/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")' | sed 's/v//'
+ENV BLYNK_SERVER_VERSION 0
 
-LABEL Name=blynk Version=${BLYNK_SERVER_VERSION}
+RUN curl --silent "https://api.github.com/repos/blynkkk/blynk-server/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")' | sed 's/v//' > $BLYNK_SERVER_VERSION
+
+LABEL Name=blynk Version=$BLYNK_SERVER_VERSION
 RUN mkdir /blynk
-RUN curl -L https://github.com/blynkkk/blynk-server/releases/download/v${BLYNK_SERVER_VERSION}/server-${BLYNK_SERVER_VERSION}.jar > /blynk/server.jar
+RUN curl -L https://github.com/blynkkk/blynk-server/releases/download/v$BLYNK_SERVER_VERSION/server-$BLYNK_SERVER_VERSION.jar > /blynk/server.jar
 
 # Create data folder. To persist data, map a volume to /data
 RUN mkdir /data
