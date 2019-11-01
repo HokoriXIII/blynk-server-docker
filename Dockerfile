@@ -18,5 +18,5 @@ VOLUME ["/blynk", "/blynk/config", "/blynk/data"]
 EXPOSE 8080 9443
 
 WORKDIR /blynk
-ENTRYPOINT ["java", "-jar", "/blynk/server.jar", "-dataFolder", "/data", "-serverConfig", "/config/server.properties"]
+ENTRYPOINT ["java", "-jar", "/blynk/server.jar", "-dataFolder", "/blynk/data", "-serverConfig", "/blynk/config/server.properties"]
 # CMD [ "/bin/bash" ]
